@@ -32,10 +32,8 @@ function App() {
         {/* Public Access Route */}
         <Route path="/login" element={<Login />} />
 
-        {/* PROTECTED ROUTES: Only accessible if authenticated AND role is 'admin' */}
+        {/* ADMIN PROTECTED ROUTES */}
         <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
-          
-         {/* Admin Protected Routes */}
           <Route path="/" element={<AdminDashboardLayout />}>
             <Route index element={<Navigate to="/dashboard" replace />} />
             <Route path="dashboard" element={<AdminDashboard />} />
@@ -48,30 +46,25 @@ function App() {
             <Route path="documents" element={<AdminDocuments />} />
             <Route path="settings" element={<AdminSettings />} />
             <Route path="approvals" element={<AdminApprovals />} />
-
           </Route>
-
         </Route>
 
-        {/* Teacher Protected Route */}
+        {/* TEACHER PROTECTED ROUTES */}
         <Route element={<ProtectedRoute allowedRoles={["teacher"]} />}>
           <Route path="/teacher" element={<TeacherDashboardLayout />}>
-          <Route path="dashboard" element={<TeacherDashboard />} />
-          <Route path="classes" element={<TeacherClasses />} />
-          <Route path="students" element={<TeacherStudents />} />
-          <Route path="attendance" element={<TeacherAttendance />} />
-          <Route path="assignment" element={<TeacherAssignment />} />
-          <Route path="exams" element={<TeacherExams />} />
-          <Route path="messages" element={<TeacherMessages />} />
-        
-
-
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<TeacherDashboard />} />
+            <Route path="classes" element={<TeacherClasses />} />
+            <Route path="students" element={<TeacherStudents />} />
+            <Route path="attendance" element={<TeacherAttendance />} />
+            <Route path="assignment" element={<TeacherAssignment />} />
+            <Route path="exams" element={<TeacherExams />} />
+            <Route path="messages" element={<TeacherMessages />} />
           </Route>
         </Route>
 
-
         {/* Fallbacks */}
-        <Route path="/unauthorized" element={<div className="p-8 text-xl font-bold">Access Denied: Admins Only</div>} />
+        <Route path="/unauthorized" element={<div className="p-8 text-xl font-bold">Access Denied</div>} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
