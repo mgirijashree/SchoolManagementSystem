@@ -3,7 +3,7 @@ import {
   Search, Download, ChevronDown, Bell, CreditCard, 
   AlertCircle, FileText, Trash2, Edit 
 } from "lucide-react";
-import { getStorageData, setStorageData } from "../data/schoolData";
+import { getStorageData, setStorageData } from "../data/schooldata";
 
 const AdminFee = () => {
   const [activeTab, setActiveTab] = useState("categories");

@@ -4,7 +4,7 @@ import {
   Calendar, Clock, Mail, MessageSquare, Send, 
   CheckCircle, Info, AlertTriangle, X
 } from "lucide-react";
-import { getStorageData, setStorageData } from "../data/schoolData";
+import { getStorageData, setStorageData } from "../data/schooldata";
 
 export default function AdminCommunication() {
   const [activeTab, setActiveTab] = useState("announcements");

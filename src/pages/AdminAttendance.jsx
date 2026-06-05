@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { 
   Search, Calendar, ChevronDown, Download, Check, X, Clock, HelpCircle, Save 
 } from "lucide-react";
-import { getStorageData, setStorageData, AVAILABLE_GRADES } from "../data/schoolData";
+import { getStorageData, setStorageData, AVAILABLE_GRADES } from "../data/schooldata";
 
 const AdminAttendance = () => {
   // --- STATE HOARDS ---
