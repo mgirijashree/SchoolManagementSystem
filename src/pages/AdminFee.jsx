@@ -31,7 +31,7 @@ const AdminFee = () => {
       if (Array.isArray(fetchedPayments)) setPayments(fetchedPayments);
       if (Array.isArray(fetchedPending)) setPendingDues(fetchedPending);
     } catch (error) {
-      console.error("Failed to parse schoolData metrics inside AdminFee on mount:", error);
+      console.error("Failed to fetch data :", error);
     }
   }, []);
 
