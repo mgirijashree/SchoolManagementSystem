@@ -9,7 +9,6 @@ import {
 } from "recharts";
 import { getStorageData, setStorageData, ATTENDANCE_CHART_DATA, FEE_CHART_DATA } from "../data/schoolData";
 
-
 const AdminDashboard = ({ onNavigate }) => {
   const [students, setStudents] = useState([]);
   const [classes, setClasses] = useState([]);
