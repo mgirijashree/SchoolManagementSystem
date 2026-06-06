@@ -215,20 +215,20 @@ export const getStorageData = (key) => {
       
       // Map your keys
       switch (key) {
-        case 'students': initial = INITIAL_STUDENTS; break;
-        case 'classes': initial = INITIAL_CLASSES; break;
-        case 'activities': initial = INITIAL_ACTIVITIES; break;
-        case 'alerts': initial = INITIAL_ALERTS; break;
-        case 'approvals': initial = INITIAL_APPROVALS; break;
-        case 'users': initial = INITIAL_USERS; break;
-        case 'fee_categories': initial = INITIAL_FEE_CATEGORIES; break;
-        case 'fee_payments': initial = INITIAL_FEE_PAYMENTS; break;
-        case 'fee_pending': initial = INITIAL_FEE_PENDING; break;
-        case 'attendance': initial = ATTENDANCE_CHART_DATA; break;
-        case 'performance': initial = ACADEMIC_CLASSES_DATA; break;
-        case 'schoolData': initial = schoolData; break;
-        default: initial = [];
-      }
+  case 'students': initial = INITIAL_STUDENTS; break;
+  case 'classes': initial = INITIAL_CLASSES; break;
+  case 'activities': initial = INITIAL_ACTIVITIES; break;
+  case 'alerts': initial = INITIAL_ALERTS; break;
+  case 'approvals': initial = INITIAL_APPROVALS; break;
+  case 'users': initial = INITIAL_USERS; break;
+  case 'fee_categories': initial = INITIAL_FEE_CATEGORIES; break;
+  case 'fee_payments': initial = INITIAL_FEE_PAYMENTS; break;
+  case 'fee_pending': initial = INITIAL_FEE_PENDING; break;
+  case 'attendance': initial = ATTENDANCE_CHART_DATA; break;
+  case 'performance': initial = ACADEMIC_CLASSES_DATA; break;
+  case 'schoolData': initial = schoolData; break; // This references your default export
+  default: initial = [];
+}
 
       // Initialize the clean data
       localStorage.setItem(`edusmart_${key}`, JSON.stringify(initial));
