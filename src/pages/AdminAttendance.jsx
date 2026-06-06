@@ -3,6 +3,7 @@ import {
   Search, Calendar, ChevronDown, Download, Check, X, Clock, HelpCircle, Save 
 } from "lucide-react";
 import { getStorageData, setStorageData, AVAILABLE_GRADES } from "../data/schoolData";
+import * as XLSX from 'xlsx';
 
 const AdminAttendance = () => {
   // --- STATE HOARDS ---
@@ -57,6 +58,13 @@ const AdminAttendance = () => {
     return counts;
   }, [filteredRecords]);
 
+
+  const exportToExcel = () => {
+  if (filteredRecords.length === 0) {
+    alert("No data available to export.");
+    return;
+  }
+
   // --- IN-PLACE ROW INTERACTION HANDLERS ---
   const handleStatusChange = (id, newStatus) => {
     if (activeTab === "student") {
@@ -105,6 +113,27 @@ const AdminAttendance = () => {
     document.body.removeChild(linkElement);
   };
 
+
+  // 1. Map your filtered records to a clean structure for Excel
+  const dataToExport = filteredRecords.map(r => ({
+    "Name": r.name,
+    "Roll/ID No": r.rollNo,
+    "Class Group": r.class,
+    "Status": r.status,
+    "Remarks": r.remarks || '',
+    "Date": r.date
+  }));
+
+  // 2. Create the worksheet and workbook
+  const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Attendance");
+
+  // 3. Generate and trigger download
+  XLSX.writeFile(workbook, `Attendance_Report_${activeTab}_${selectedDate}.xlsx`);
+};
+
+
   return (
     <div className="p-6 space-y-6 w-full max-w-[1400px] mx-auto text-gray-800">
       
@@ -115,11 +144,11 @@ const AdminAttendance = () => {
           <p className="text-gray-500 text-xs mt-0.5 font-medium">Track and manage student and staff attendance rosters seamlessly</p>
         </div>
         <button 
-          onClick={exportToCSV}
-          className="flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 px-4 rounded-xl border border-gray-200 shadow-sm transition-all"
-        >
-          <Download size={15} /> Export Excel
-        </button>
+  onClick={exportToExcel}
+  className="flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 px-4 rounded-xl border border-gray-200 shadow-sm transition-all"
+>
+  <Download size={15} /> Export Excel
+</button>
       </div>
 
       {/* VIEW DIVISION TAB SELECTORS */}
