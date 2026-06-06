@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Save } from 'lucide-react';
-import { getStorageData, setStorageData, INITIAL_STUDENTS, INITIAL_CLASSES } from '../data/schooldata';
+import { getStorageData, setStorageData, INITIAL_STUDENTS, INITIAL_CLASSES } from '../data/schoolData';
 
 const TeacherAttendance = () => {
   const [attendance, setAttendance] = useState({});

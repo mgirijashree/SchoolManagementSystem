@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Users, BookOpen, Plus, Eye, CalendarCheck, X } from 'lucide-react';
-import { getStorageData, setStorageData, INITIAL_STUDENTS } from '../data/schooldata';
+import { getStorageData, setStorageData, INITIAL_STUDENTS } from '../data/schoolData';
 
 const TeacherClasses = () => {
   const [classes, setClasses] = useState([]);

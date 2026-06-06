@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Plus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { getStorageData, setStorageData, INITIAL_CLASSES } from '../data/schooldata';
+import { getStorageData, setStorageData, INITIAL_CLASSES } from '../data/schoolData';
 
 const TeacherAssignment = () => {
     const navigate = useNavigate();

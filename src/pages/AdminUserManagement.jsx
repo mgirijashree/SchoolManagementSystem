@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { getStorageData, setStorageData } from '../data/schooldata.js';
+import { getStorageData, setStorageData } from '../data/schoolData.js';
 import { getAllUsers, createUser, updateUser, deleteUser } from '../data/userManagement.js';
 
 const AdminUserManagement = () => {

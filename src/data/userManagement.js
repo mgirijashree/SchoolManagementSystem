@@ -1,5 +1,5 @@
 // userManagement.js
-import { getStorageData, setStorageData } from './schooldata.js';
+import { getStorageData, setStorageData } from './schoolData.js';
 
 const STORAGE_KEY = 'users';
 

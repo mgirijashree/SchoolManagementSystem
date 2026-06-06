@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
-import { getStorageData, INITIAL_STUDENTS, AVAILABLE_GRADES } from '../data/schooldata';
+import { getStorageData, INITIAL_STUDENTS, AVAILABLE_GRADES } from '../data/schoolData';
 
 const TeacherStudents = () => {
   const [searchTerm, setSearchTerm] = useState('');

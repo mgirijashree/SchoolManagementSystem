@@ -7,7 +7,7 @@ import {
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
   BarChart, Bar, Cell
 } from "recharts";
-import { getStorageData, setStorageData, ATTENDANCE_CHART_DATA, FEE_CHART_DATA } from "../data/schooldata";
+import { getStorageData, setStorageData, ATTENDANCE_CHART_DATA, FEE_CHART_DATA } from "../data/schoolData";
 
 
 const AdminDashboard = ({ onNavigate }) => {

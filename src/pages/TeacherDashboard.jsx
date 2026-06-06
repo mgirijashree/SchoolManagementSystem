@@ -7,7 +7,7 @@ import {
   AreaChart, Area, BarChart, Bar, XAxis, YAxis, 
   Tooltip, ResponsiveContainer, Legend 
 } from 'recharts';
-import { getStorageData } from '../data/schooldata';
+import { getStorageData } from '../data/schoolData';
 
 const TeacherDashboard = () => {
   const schoolData = getStorageData('schoolData') || [];

@@ -9,7 +9,7 @@ import {
   ACADEMIC_CLASSES_DATA, 
   ACADEMIC_SUBJECTS_DATA, 
   ACADEMIC_EXAMS_DATA
-} from "../data/schooldata";
+} from "../data/schoolData";
 
 // 2. Inlined helper engine to eliminate dependency mismatch issues entirely
 const getLocalStorageData = (key, fallbackData) => {

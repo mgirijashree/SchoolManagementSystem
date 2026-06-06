@@ -4,7 +4,7 @@ import {
     BarChart, Bar, PieChart, Pie, Cell, Legend
 } from 'recharts';
 import * as XLSX from 'xlsx';
-import * as SchoolData from '../data/schooldata';
+import * as SchoolData from '../data/schoolData';
 
 const COLORS = ['#8884d8', '#ff8042', '#00C49F', '#FFBB28', '#0088FE'];
 
