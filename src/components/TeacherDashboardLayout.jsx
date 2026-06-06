@@ -2,8 +2,8 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 
-import TeacherSidebar from './components/TeacherSidebar';
-import TeacherTopbar from './components/TeacherTopBar';
+import TeacherSidebar from './TeacherSidebar';
+import TeacherTopbar from './TeacherTopBar';
 
 
 const TeacherDashboardLayout = () => {

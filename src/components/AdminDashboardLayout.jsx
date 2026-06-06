@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import AdminSidebar from "./components/AdminSidebar"; 
-import AdminTopBar from "./components/AdminTopBar"; 
+import AdminSidebar from "./AdminSidebar"; 
+import AdminTopBar from "./AdminTopBar"; 
 import {
   Users, BookOpen, IndianRupee, Plus, GraduationCap, TrendingUp, 
   Clock, Check, X, AlertTriangle, Bell } from "lucide-react";
