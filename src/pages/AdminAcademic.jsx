@@ -5,11 +5,7 @@ import {
 } from "lucide-react";
 
 // 1. Cleaned up imports - strictly pulling mock data arrays now
-import { 
-  ACADEMIC_CLASSES_DATA, 
-  ACADEMIC_SUBJECTS_DATA, 
-  ACADEMIC_EXAMS_DATA
-} from "../data/schoolData";
+import { getStorageData, setStorageData, ACADEMIC_CLASSES_DATA, ACADEMIC_SUBJECTS_DATA, ACADEMIC_EXAMS_DATA } from "../data/schoolData";
 
 // 2. Inlined helper engine to eliminate dependency mismatch issues entirely
 const getLocalStorageData = (key, fallbackData) => {
@@ -27,22 +23,17 @@ const AdminAcademic = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // --- STATE INITIALIZATION WITH LOCALSTORAGE CORES ---
-  const [classesData, setClassesData] = useState(() => 
-    getLocalStorageData("edusmart_classes", ACADEMIC_CLASSES_DATA)
-  );
-  const [subjectsData, setSubjectsData] = useState(() => 
-    getLocalStorageData("edusmart_subjects", ACADEMIC_SUBJECTS_DATA)
-  );
-  const [examsData, setExamsData] = useState(() => 
-    getLocalStorageData("edusmart_exams", ACADEMIC_EXAMS_DATA)
-  );
-  
-  const [timetableData, setTimetableData] = useState(() => 
-    getLocalStorageData("edusmart_timetable", [
-      { id: 1, day: "Monday", time: "08:00 AM", subject: "Mathematics", teacher: "Girijashree M", room: "Room 101" },
-      { id: 2, day: "Tuesday", time: "08:00 AM", subject: "Science", teacher: "Karthik Raja", room: "Room 205" }
-    ])
-  );
+  // --- INITIALIZE FROM CENTRAL STORAGE ENGINE ---
+  const [classesData, setClassesData] = useState(() => getStorageData("classes"));
+  const [subjectsData, setSubjectsData] = useState(() => getStorageData("subjects") || ACADEMIC_SUBJECTS_DATA);
+  const [examsData, setExamsData] = useState(() => getStorageData("exams") || ACADEMIC_EXAMS_DATA);
+  const [timetableData, setTimetableData] = useState(() => getStorageData("timetable") || []);
+
+  // --- PERSISTENCE WRAPPERS ---
+  useEffect(() => { setStorageData("classes", classesData); }, [classesData]);
+  useEffect(() => { setStorageData("subjects", subjectsData); }, [subjectsData]);
+  useEffect(() => { setStorageData("exams", examsData); }, [examsData]);
+  useEffect(() => { setStorageData("timetable", timetableData); }, [timetableData]);
 
   // --- EXTRACTION ENGINE FOR ALL LIVE LOOKUPS ---
   const uniqueGrades = [...new Set(classesData.map(item => item.grade))].sort();

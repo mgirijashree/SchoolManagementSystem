@@ -65,7 +65,7 @@ const AdminAttendance = () => {
     return;
   }
 
-  // --- IN-PLACE ROW INTERACTION HANDLERS ---
+  // --- INTERACTION HANDLERS (Placed at the top level of component) ---
   const handleStatusChange = (id, newStatus) => {
     if (activeTab === "student") {
       setStudentRecords(prev => prev.map(item => item.id === id ? { ...item, status: newStatus } : item));
@@ -80,6 +80,34 @@ const AdminAttendance = () => {
     } else {
       setStaffRecords(prev => prev.map(item => item.id === id ? { ...item, remarks: updatedText } : item));
     }
+  };
+
+  const saveBatchToStorage = () => {
+    setStorageData("student_attendance", studentRecords);
+    setStorageData("staff_attendance", staffRecords);
+    alert(`Success: ${activeTab === "student" ? "Student" : "Staff"} Batch Saved Successfully!.`);
+  };
+
+  // --- EXPORT FUNCTION ---
+  const exportToExcel = () => {
+    if (filteredRecords.length === 0) {
+      alert("No data available to export.");
+      return;
+    }
+
+    const dataToExport = filteredRecords.map(r => ({
+      "Name": r.name,
+      "Roll/ID No": r.rollNo,
+      "Class Group": r.class,
+      "Status": r.status,
+      "Remarks": r.remarks || '',
+      "Date": r.date
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Attendance");
+    XLSX.writeFile(workbook, `Attendance_Report_${activeTab}_${selectedDate}.xlsx`);
   };
 
   // --- PERSISTENCE: SAVE BATCH STORAGE ROUTINE ---
