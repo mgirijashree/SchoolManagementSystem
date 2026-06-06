@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import * as XLSX from 'xlsx';
 import { getStorageData, setStorageData } from '../data/schoolData';
 import { getAllUsers, createUser, updateUser, deleteUser } from '../data/userManagement';
 
@@ -43,6 +44,23 @@ const AdminUserManagement = () => {
     setStatusFilter('All');
   };
 
+  const handleExportExcel = () => {
+    const dataToExport = filteredItems.map(item => ({
+      ID: item.id,
+      Name: item.name,
+      Email: item.subtitle,
+      Category: item.mainField,
+      Details: item.details,
+      Status: item.status,
+      Joined: item.date || 'N/A'
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, activeTab);
+    XLSX.writeFile(workbook, `${activeTab}_Report.xlsx`);
+  };
+  
   // --- MUTATION HANDLING HANDLERS (CRUD) ---
   const handleOpenModal = (item = null) => {
     if (item) {
@@ -169,9 +187,23 @@ const AdminUserManagement = () => {
           <p style={{ fontSize: '15px', color: '#64748b', margin: 0 }}>Manage Students, Staffs and parents across the school</p>
         </div>
         <div style={{ display: 'flex', gap: '12px' }}>
-          <button style={{ padding: '10px 18px', border: '1px solid #cbd5e1', backgroundColor: '#fff', borderRadius: '30px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '500', color: '#334155' }}>
-            <span>📤</span> Import Excel
-          </button>
+          <button 
+  onClick={handleExportExcel} 
+  style={{ 
+    padding: '10px 18px', 
+    border: '1px solid #cbd5e1', 
+    backgroundColor: '#fff', 
+    borderRadius: '30px', 
+    cursor: 'pointer', 
+    display: 'flex', 
+    alignItems: 'center', 
+    gap: '8px', 
+    fontWeight: '500', 
+    color: '#334155' 
+  }}
+>
+  <span>📥</span> Export Excel
+</button>
           <button onClick={() => handleOpenModal()} style={{ padding: '10px 20px', backgroundColor: '#2563eb', color: '#fff', border: 'none', borderRadius: '30px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '500', boxShadow: '0 2px 4px rgba(37,99,235,0.2)' }}>
             <span style={{ fontSize: '18px' }}>+</span> Add {activeTab.slice(0, -1)}
           </button>

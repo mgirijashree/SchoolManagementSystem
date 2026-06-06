@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Login from "./pages/Login";
 import AdminDashboardLayout from "./components/AdminDashboardLayout";
 import AdminDashboard from "./pages/AdminDashboard";
-import AdminUserManagement from "./pages/AdminUserManagement";
+import AdminUserManagement from './pages/AdminUserManagement';
 import AdminAcademic from "./pages/AdminAcademic";
 import AdminAttendance from "./pages/AdminAttendance";
 import AdminFee from "./pages/AdminFee"; 
