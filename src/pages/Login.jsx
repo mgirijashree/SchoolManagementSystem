@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import loginBg from "../assets/login.jpg";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -95,12 +96,11 @@ const Login = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center px-4"
-      style={{
-        backgroundImage:
-          "url('./src/assets/login.jpg')",
-      }}
-    >
+  className="min-h-screen flex items-center justify-center bg-cover bg-center px-4"
+  style={{
+    backgroundImage: `url(${loginBg})`, 
+  }}
+>
       <div className="w-full max-w-2xl bg-[#FDF8EE] rounded-[40px] shadow-2xl p-8 md:p-12">
         {/* Heading */}
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
