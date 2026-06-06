@@ -222,19 +222,20 @@ const AdminAcademic = () => {
                 <button onClick={() => setClassesData(classesData.filter(c => c.id !== item.id))} className="p-1.5 text-rose-400 hover:text-rose-600 transition"><Trash2 size={16} /></button>
               </div>
               <div className="mt-4">
-                <h3 className="text-lg font-black text-gray-900">{item.grade} - {item.section}</h3>
-                <p className="text-gray-400 text-xs font-semibold mt-0.5">{item.room}</p>
-              </div>
-              <div className="flex items-center justify-between mt-5 pt-4 border-t border-gray-50">
-                <div className="text-gray-500 font-bold text-xs">👤 {item.count} Students</div>
-                <span className="bg-[#B0A2F1]/20 text-[#6C56E0] font-bold text-[11px] px-3 py-1 rounded-full">{item.badgeColor}</span>
-              </div>
-              <div className="mt-4 space-y-1 bg-gray-50/50 p-3 rounded-xl text-xs font-medium text-gray-600">
-                <p><span className="text-gray-400">Class Teacher:</span> {item.teacher}</p>
-                <p><span className="text-gray-400">Schedule:</span> {item.time}</p>
-              </div>
-            </div>
-          ))}
+               <h3 className="text-lg font-black text-gray-900">{item.name}</h3> 
+      <p className="text-gray-400 text-xs font-semibold mt-0.5">{item.room}</p>
+    </div>
+    <div className="flex items-center justify-between mt-5 pt-4 border-t border-gray-50">
+      <div className="text-gray-500 font-bold text-xs">👤 {item.count} Students</div>
+      {/* Access item.label or item.grade depending on your desired display */}
+      <span className="bg-[#B0A2F1]/20 text-[#6C56E0] font-bold text-[11px] px-3 py-1 rounded-full">{item.label}</span>
+    </div>
+    <div className="mt-4 space-y-1 bg-gray-50/50 p-3 rounded-xl text-xs font-medium text-gray-600">
+      <p><span className="text-gray-400">Class Teacher:</span> {item.teacher}</p>
+      <p><span className="text-gray-400">Schedule:</span> {item.schedule}</p>
+    </div>
+  </div>
+))}
         </div>
       )}
 
