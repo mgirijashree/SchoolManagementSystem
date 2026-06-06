@@ -36,10 +36,11 @@ const AdminDashboard = ({ onNavigate }) => {
       setApprovals(getStorageData("approvals") ?? []);
 
       
-    } catch (error) {
-      console.error("Storage Load Error:", error);
-    }
-  }, []);
+    setIsMounted(true); // Add this line
+  } catch (error) {
+    console.error("Storage Load Error:", error);
+  }
+}, []);
 
   const handleApprovalAction = (id, action) => {
     const target = approvals.find(i => i.id === id);
