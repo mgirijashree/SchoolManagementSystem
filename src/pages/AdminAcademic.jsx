@@ -28,17 +28,17 @@ const AdminAcademic = () => {
 
   // --- STATE INITIALIZATION WITH LOCALSTORAGE CORES ---
   const [classesData, setClassesData] = useState(() => 
-    getLocalStorageData("academic_classes", ACADEMIC_CLASSES_DATA)
+    getLocalStorageData("edusmart_classes", ACADEMIC_CLASSES_DATA)
   );
   const [subjectsData, setSubjectsData] = useState(() => 
-    getLocalStorageData("academic_subjects", ACADEMIC_SUBJECTS_DATA)
+    getLocalStorageData("edusmart_subjects", ACADEMIC_SUBJECTS_DATA)
   );
   const [examsData, setExamsData] = useState(() => 
-    getLocalStorageData("academic_exams", ACADEMIC_EXAMS_DATA)
+    getLocalStorageData("edusmart_exams", ACADEMIC_EXAMS_DATA)
   );
   
   const [timetableData, setTimetableData] = useState(() => 
-    getLocalStorageData("academic_timetable", [
+    getLocalStorageData("edusmart_timetable", [
       { id: 1, day: "Monday", time: "08:00 AM", subject: "Mathematics", teacher: "Girijashree M", room: "Room 101" },
       { id: 2, day: "Tuesday", time: "08:00 AM", subject: "Science", teacher: "Karthik Raja", room: "Room 205" }
     ])
@@ -106,10 +106,10 @@ const AdminAcademic = () => {
   }, [isModalOpen, classesData, subjectsData, examsData]);
 
   // Sync back mutations into persistent browser engine blocks
-  useEffect(() => { localStorage.setItem("academic_classes", JSON.stringify(classesData)); }, [classesData]);
-  useEffect(() => { localStorage.setItem("academic_subjects", JSON.stringify(subjectsData)); }, [subjectsData]);
-  useEffect(() => { localStorage.setItem("academic_exams", JSON.stringify(examsData)); }, [examsData]);
-  useEffect(() => { localStorage.setItem("academic_timetable", JSON.stringify(timetableData)); }, [timetableData]);
+  useEffect(() => { localStorage.setItem("edusmart_classes", JSON.stringify(classesData)); }, [classesData]);
+  useEffect(() => { localStorage.setItem("edusmart_subjects", JSON.stringify(subjectsData)); }, [subjectsData]);
+  useEffect(() => { localStorage.setItem("edusmart_exams", JSON.stringify(examsData)); }, [examsData]);
+  useEffect(() => { localStorage.setItem("edusmart_timetable", JSON.stringify(timetableData)); }, [timetableData]);
 
   const menuTabs = [
     { id: "classes", label: "Classes & sections", icon: <LayoutGrid size={16} /> },
