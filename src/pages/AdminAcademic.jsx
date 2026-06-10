@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { 
-  BookOpen, Calendar, Award, LayoutGrid, Plus, Edit2, Trash2, 
-  Search, ChevronDown, AlertTriangle, X
+import {
+  BookOpen,
+  Calendar,
+  Award,
+  LayoutGrid,
+  Plus,
+  Trash2,
+  X
 } from "lucide-react";
 
-// 1. Cleaned up imports - strictly pulling mock data arrays now
-import { getStorageData, setStorageData, ACADEMIC_CLASSES_DATA, ACADEMIC_SUBJECTS_DATA, ACADEMIC_EXAMS_DATA } from "../data/schoolData";
+// 1. pulling mock data arrays now
+import { getStorageData, setStorageData, INITIAL_CLASSES,ACADEMIC_CLASSES_DATA, ACADEMIC_SUBJECTS_DATA, ACADEMIC_EXAMS_DATA } from "../data/schoolData";
 
-// 2. Inlined helper engine to eliminate dependency mismatch issues entirely
-const getLocalStorageData = (key, fallbackData) => {
-  const saved = localStorage.getItem(key);
-  if (!saved) {
-    localStorage.setItem(key, JSON.stringify(fallbackData));
-    return fallbackData;
-  }
-  return JSON.parse(saved);
-};
+
 
 const AdminAcademic = () => {
   const [activeTab, setActiveTab] = useState("classes");
@@ -23,8 +20,8 @@ const AdminAcademic = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // --- STATE INITIALIZATION WITH LOCALSTORAGE CORES ---
-  // --- INITIALIZE FROM CENTRAL STORAGE ENGINE ---
-  const [classesData, setClassesData] = useState(() => getStorageData("classes"));
+
+  const [classesData, setClassesData] = useState(() => getStorageData("classes") || INITIAL_CLASSES);
   const [subjectsData, setSubjectsData] = useState(() => getStorageData("subjects") || ACADEMIC_SUBJECTS_DATA);
   const [examsData, setExamsData] = useState(() => getStorageData("exams") || ACADEMIC_EXAMS_DATA);
   const [timetableData, setTimetableData] = useState(() => getStorageData("timetable") || []);
@@ -36,7 +33,8 @@ const AdminAcademic = () => {
   useEffect(() => { setStorageData("timetable", timetableData); }, [timetableData]);
 
   // --- EXTRACTION ENGINE FOR ALL LIVE LOOKUPS ---
-  const uniqueGrades = [...new Set(classesData.map(item => item.grade))].sort();
+  const uniqueGrades = [...new Set(classesData.map(item => item.label))
+].filter(Boolean).sort();
   const uniqueTeachers = [...new Set([
     ...classesData.map(item => item.teacher),
     ...subjectsData.map(item => item.teacher),
@@ -96,12 +94,7 @@ const AdminAcademic = () => {
     }
   }, [isModalOpen, classesData, subjectsData, examsData]);
 
-  // Sync back mutations into persistent browser engine blocks
-  useEffect(() => { localStorage.setItem("edusmart_classes", JSON.stringify(classesData)); }, [classesData]);
-  useEffect(() => { localStorage.setItem("edusmart_subjects", JSON.stringify(subjectsData)); }, [subjectsData]);
-  useEffect(() => { localStorage.setItem("edusmart_exams", JSON.stringify(examsData)); }, [examsData]);
-  useEffect(() => { localStorage.setItem("edusmart_timetable", JSON.stringify(timetableData)); }, [timetableData]);
-
+  
   const menuTabs = [
     { id: "classes", label: "Classes & sections", icon: <LayoutGrid size={16} /> },
     { id: "subjects", label: "Subjects", icon: <BookOpen size={16} /> },
@@ -113,11 +106,14 @@ const AdminAcademic = () => {
   const handleAddClass = (e) => {
     e.preventDefault();
     const newClass = {
-      ...classForm,
-      id: Date.now(),
-      count: parseInt(classForm.count, 10) || 0,
-      badgeColor: classForm.grade
-    };
+  ...classForm,
+  id: Date.now(),
+  name: `${classForm.grade} - ${classForm.section}`,  
+  label: classForm.grade,                             
+  schedule: classForm.time,                            // ← maps time → schedule
+  count: parseInt(classForm.count, 10) || 0,
+  badgeColor: classForm.grade
+};
     setClassesData([...classesData, newClass]);
     setIsModalOpen(false);
   };

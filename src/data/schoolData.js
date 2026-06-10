@@ -228,6 +228,49 @@ export const INITIAL_BROADCAST = {
   smsCount: 1
 };
 
+export const INITIAL_STUDENT_ATTENDANCE = [
+  {
+    id: 1,
+    name: "Ananya Krishnan",
+    rollNo: "STU-24001",
+    class: "Grade 5 - A",
+    gradeGroup: "Grade 5 · A",
+    status: "Present",
+    remarks: "",
+    date: "2026-04-14"
+  },
+  {
+    id: 2,
+    name: "Siddharth Venkat",
+    rollNo: "STU-24002",
+    class: "Grade 6 - B",
+    gradeGroup: "Grade 6 · B",
+    status: "Absent",
+    remarks: "",
+    date: "2026-04-14"
+  }
+];
+
+export const INITIAL_STAFF_ATTENDANCE = [
+  {
+    id: 1,
+    name: "Sharanya Iyer",
+    rollNo: "EMP-001",
+    class: "Primary Education",
+    status: "Present",
+    remarks: "",
+    date: "2026-04-14"
+  },
+  {
+    id: 2,
+    name: "Karthik Chandran",
+    rollNo: "EMP-002",
+    class: "Secondary Education",
+    status: "Late",
+    remarks: "",
+    date: "2026-04-14"
+  }
+];
 
  const schoolData = [
   { id: 1, name: "Arjun Balakrishnan", rollNo: "TN-101", type: "Certificate", date: "2026-06-01", status: "Pending", size: "245KB" },
@@ -266,6 +309,9 @@ export const getStorageData = (key) => {
   case 'fee_pending': initial = INITIAL_FEE_PENDING; break;
   case 'attendance': initial = ATTENDANCE_CHART_DATA; break;
   case 'performance': initial = ACADEMIC_CLASSES_DATA; break;
+  case 'student_attendance':  initial = INITIAL_STUDENT_ATTENDANCE;break;
+
+case 'staff_attendance':  initial = INITIAL_STAFF_ATTENDANCE;  break;
   case 'schoolData': initial = schoolData; break; // This references your default export
   default: initial = [];
 }

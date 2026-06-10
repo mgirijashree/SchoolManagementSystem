@@ -110,12 +110,7 @@ const AdminAttendance = () => {
     XLSX.writeFile(workbook, `Attendance_Report_${activeTab}_${selectedDate}.xlsx`);
   };
 
-  // --- PERSISTENCE: SAVE BATCH STORAGE ROUTINE ---
-  const saveBatchToStorage = () => {
-    setStorageData("student_attendance", studentRecords);
-    setStorageData("staff_attendance", staffRecords);
-    alert(`Success: ${activeTab === "student" ? "Student" : "Staff"} Batch Saved Successfully!.`);
-  };
+  
 
   // --- EXPORT: EXCEL DATA MATRIX PARSER GENERATOR ---
   const exportToCSV = () => {
