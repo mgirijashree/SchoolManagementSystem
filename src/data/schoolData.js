@@ -93,14 +93,7 @@ export const FEE_CHART_DATA = [
   { month: "Jun", Collected: 48 },
 ];
 
-export const ACADEMIC_SUBJECTS_DATA = [
-  { name: "Maths", score: 78 },
-  { name: "English", score: 72 },
-  { name: "History", score: 65 },
-  { name: "Arts", score: 85 },
-  { name: "PE", score: 90 },
-  { name: "Science", score: 78 }
-];
+
 export const ACADEMIC_SUBJECTS_DATA = [
   {
     id: "MTH101",
