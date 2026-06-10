@@ -101,6 +101,51 @@ export const ACADEMIC_SUBJECTS_DATA = [
   { name: "PE", score: 90 },
   { name: "Science", score: 78 }
 ];
+export const ACADEMIC_SUBJECTS_DATA = [
+  {
+    id: "MTH101",
+    name: "Maths",
+    teacher: "Sharanya Iyer",
+    hours: "5h",
+    grade: "Grade 5"
+  },
+  {
+    id: "ENG101",
+    name: "English",
+    teacher: "Karthik Chandran",
+    hours: "4h",
+    grade: "Grade 5"
+  },
+  {
+    id: "HIS101",
+    name: "History",
+    teacher: "Deepa Lakshmi",
+    hours: "3h",
+    grade: "Grade 6"
+  },
+  {
+    id: "ART101",
+    name: "Arts",
+    teacher: "Malini Hegde",
+    hours: "2h",
+    grade: "Grade 5"
+  },
+  {
+    id: "PE101",
+    name: "PE",
+    teacher: "Jayakumar Pillai",
+    hours: "2h",
+    grade: "Grade 6"
+  },
+  {
+    id: "SCI101",
+    name: "Science",
+    teacher: "Aswathy Menon",
+    hours: "5h",
+    grade: "Grade 5"
+  }
+];
+
 
 export const ACADEMIC_CLASSES_DATA = [
   { grade: "Grade 3", pass: 95, fail: 5 },
@@ -221,6 +266,8 @@ export const getStorageData = (key) => {
   case 'alerts': initial = INITIAL_ALERTS; break;
   case 'approvals': initial = INITIAL_APPROVALS; break;
   case 'users': initial = INITIAL_USERS; break;
+  case 'exams':  initial = ACADEMIC_EXAMS_DATA;  break;
+  case 'subjects':  initial = ACADEMIC_SUBJECTS_DATA;  break;
   case 'fee_categories': initial = INITIAL_FEE_CATEGORIES; break;
   case 'fee_payments': initial = INITIAL_FEE_PAYMENTS; break;
   case 'fee_pending': initial = INITIAL_FEE_PENDING; break;
