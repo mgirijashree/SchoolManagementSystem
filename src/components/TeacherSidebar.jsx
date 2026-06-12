@@ -27,7 +27,7 @@ const TeacherSidebar = () => {
     <>
       {/* ... (Keep your Mobile Toggle Bar as is) ... */}
 
-      <aside className={`fixed lg:sticky top-0 left-0 h-screen w-72 bg-[#E59B33] text-white flex flex-col justify-between z-50 shadow-lg transition-transform duration-300 ease-in-out lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <aside className={`fixed lg:sticky top-0 left-0 h-screen w-72 bg-[#2A3EB1] text-white flex flex-col justify-between z-50 shadow-lg transition-transform duration-300 ease-in-out lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex flex-col flex-1 min-h-0">
           <div className="p-6 flex items-center justify-between gap-3 border-b border-white/10">
             <div className="flex items-center gap-3">

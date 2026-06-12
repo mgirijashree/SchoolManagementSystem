@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { 
-  LayoutDashboard, Users, BookOpen, CalendarCheck, 
-  Wallet, MessageSquare, BarChart3, Folder, Settings, 
-  CheckSquare, LogOut, Menu, X 
+import {
+  LayoutDashboard,
+  Users,
+  BookOpen,
+  CalendarCheck,
+  Wallet,
+  MessageSquare,
+  BarChart3,
+  Folder,
+  Settings,
+  CheckSquare,
+  LogOut,
+  X
 } from "lucide-react";
 
-const AdminSidebar = () => {
+const AdminSidebar = ({ isOpen, setIsOpen }) => {
+
   const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
     { label: "Dashboard", path: "/dashboard", icon: <LayoutDashboard /> },
@@ -30,35 +39,40 @@ const AdminSidebar = () => {
 
   return (
     <>
-      {/* 1. MOBILE & TABLET TOP TOGGLE BAR */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#E59B33] text-white flex items-center justify-between px-6 z-40 shadow-md">
-        <div className="flex items-center gap-2">
-          <BookOpen className="w-5 h-5" />
-          <span className="font-bold text-lg tracking-wide">EDUSMART</span>
-        </div>
-        <button 
-          onClick={() => setIsOpen(!isOpen)} 
-          className="p-2 hover:bg-white/10 rounded-lg transition"
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
+   
 
       {/* 2. MOBILE BACKGROUND DIM OVERLAY */}
       {isOpen && (
         <div 
-          className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-xs z-40 transition-opacity duration-300"
+          className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-xs z-30 transition-opacity duration-300"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* 3. RESPONSIVE SIDEBAR SHELL (NO INNER SCROLL) */}
-      <aside className={`
-        fixed lg:sticky top-0 left-0 h-screen w-72 bg-[#E59B33] text-white flex flex-col justify-between 
-        z-50 shadow-lg font-['Inter',_sans-serif] transition-transform duration-300 ease-in-out lg:translate-x-0
+      <aside
+        className={`
+        fixed
+        top-0
+        left-0
+        h-screen
+        w-72
+        bg-[#E59B33]
+        text-white
+        flex
+        flex-col
+        justify-between
+        z-50
+
+        transform
+        transition-transform
+        duration-300
+
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
-      `}>
+
+        lg:translate-x-0
+        `}
+        >
         {/* Main Wrapper: Takes up all available space above footer */}
         <div className="flex flex-col flex-1 min-h-0">
           
@@ -79,7 +93,15 @@ const AdminSidebar = () => {
           </div>
 
           {/* Navigation Container: Scaled to fill height cleanly without overflow */}
-          <nav className="flex-1 px-4 py-2 flex flex-col justify-between gap-y-0.5">
+          <nav
+            className="
+            flex-1
+            overflow-y-auto
+            px-4
+            py-4
+            space-y-2
+            "
+            >
             {navItems.map((item) => {
               const isActivePath = location.pathname === item.path;
               return (
@@ -134,8 +156,7 @@ const AdminSidebar = () => {
         </div>
       </aside>
 
-      {/* Spacing helper for mobile view layouts */}
-      <div className="h-16 lg:hidden w-full" />
+      
     </>
   );
 };

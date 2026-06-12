@@ -1,29 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import AdminSidebar from "./AdminSidebar"; 
-import AdminTopBar from "./AdminTopBar"; 
-import {
-  Users, BookOpen, IndianRupee, Plus, GraduationCap, TrendingUp, 
-  Clock, Check, X, AlertTriangle, Bell } from "lucide-react";
+import { Menu } from "lucide-react";
+
+import AdminSidebar from "./AdminSidebar";
+import AdminTopBar from "./AdminTopBar";
 
 const AdminDashboardLayout = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <div className="flex w-full min-h-screen bg-[#F4FAFA]">
-      {/* 1. Left Sidebar Navigation Panel */}
-      <AdminSidebar />
+    <div className="bg-[#F4FAFA] min-h-screen">
 
-      {/* 2. Main Work Area View Window */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-x-hidden">
-        
-        {/* Global Header Top Bar applied seamlessly across all sub-routes */}
-        <AdminTopBar searchPlaceholder="Search school metrics, logs, indices..." />
+      {/* Sidebar */}
+      <AdminSidebar
+        isOpen={sidebarOpen}
+        setIsOpen={setSidebarOpen}
+      />
 
-        {/* Dynamic Workspace: The <Outlet /> component renders sub-pages (Dashboard, Academic, User Management, etc.) */}
-        <div className="flex-1">
-          <Outlet />
+      {/* Main */}
+      <div className="lg:ml-72">
+
+        {/* Mobile Menu */}
+        <div className="lg:hidden bg-white p-3">
+          <button
+            onClick={() => setSidebarOpen(true)}
+          >
+            <Menu />
+          </button>
         </div>
-        
+
+        {/* Fixed Topbar */}
+        <div className="fixed top-0 left-0 right-0 lg:left-72 z-20">
+          <AdminTopBar
+            searchPlaceholder="Search school metrics, logs, indices..."
+          />
+        </div>
+
+        {/* Page */}
+        <main
+          className="
+          pt-[90px]
+          p-6
+          "
+        >
+          <Outlet />
+        </main>
+
       </div>
+
     </div>
   );
 };
