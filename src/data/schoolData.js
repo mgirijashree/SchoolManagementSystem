@@ -301,15 +301,6 @@ export const getStorageData = (key) => {
     return null;
   }
 };
-
-export const setStorageData = (key, data) => {
-  try {
-    localStorage.setItem(`edusmart_${key}`, JSON.stringify(data));
-  } catch (error) {
-    console.error(`Error saving data for ${key}:`, error);
-  }
-};
-
 /**
  * Updates data in localStorage and persists the change.
  */
@@ -320,3 +311,4 @@ export const setStorageData = (key, data) => {
     console.error(`Error saving data for ${key}:`, error);
   }
 };
+
