@@ -291,13 +291,13 @@ export default schoolData;
 export const getStorageData = (key) => {
   try {
     const rawData = localStorage.getItem(`edusmart_${key}`);
-    // FIX: If data is missing or "undefined", return null to trigger the fallback
     if (!rawData || rawData === "undefined" || rawData === "null") {
       return null;
     }
-    return JSON.parse(rawData);
+    const parsed = JSON.parse(rawData);
+    // Return null if empty so the component knows to use defaults
+    return (Array.isArray(parsed) && parsed.length > 0) ? parsed : null;
   } catch (error) {
-    console.error(`Error parsing data for ${key}:`, error);
     return null;
   }
 };

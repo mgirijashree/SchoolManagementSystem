@@ -22,7 +22,10 @@ const AdminAcademic = () => {
   // --- STATE INITIALIZATION WITH LOCALSTORAGE CORES ---
 
   const [classesData, setClassesData] = useState(() => getStorageData("classes") || INITIAL_CLASSES);
-  const [subjectsData, setSubjectsData] = useState(() => getStorageData("subjects") || ACADEMIC_SUBJECTS_DATA);
+  const [subjectsData, setSubjectsData] = useState(() => {  const data = getStorageData("subjects");
+  // Only use localStorage if it actually contains items
+  return (data && data.length > 0) ? data : ACADEMIC_SUBJECTS_DATA;
+});
   const [examsData, setExamsData] = useState(() => getStorageData("exams") || ACADEMIC_EXAMS_DATA);
   const [timetableData, setTimetableData] = useState(() => getStorageData("timetable") || []);
 
