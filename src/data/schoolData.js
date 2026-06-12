@@ -286,46 +286,27 @@ export const INITIAL_STAFF_ATTENDANCE = [
 ];
 export default schoolData;
 // 3. Central LocalStorage Key Handlers
+
+
 export const getStorageData = (key) => {
   try {
     const rawData = localStorage.getItem(`edusmart_${key}`);
-
-    // Check if the data is missing, null, or the corrupted string "undefined"
+    // FIX: If data is missing or "undefined", return null to trigger the fallback
     if (!rawData || rawData === "undefined" || rawData === "null") {
-      let initial;
-      
-      // Map your keys
-      switch (key) {
-  case 'students': initial = INITIAL_STUDENTS; break;
-  case 'classes': initial = INITIAL_CLASSES; break;
-  case 'activities': initial = INITIAL_ACTIVITIES; break;
-  case 'alerts': initial = INITIAL_ALERTS; break;
-  case 'approvals': initial = INITIAL_APPROVALS; break;
-  case 'users': initial = INITIAL_USERS; break;
-  case 'exams':  initial = ACADEMIC_EXAMS_DATA;  break;
-  case 'subjects':  initial = ACADEMIC_SUBJECTS_DATA;  break;
-  case 'fee_categories': initial = INITIAL_FEE_CATEGORIES; break;
-  case 'fee_payments': initial = INITIAL_FEE_PAYMENTS; break;
-  case 'fee_pending': initial = INITIAL_FEE_PENDING; break;
-  case 'attendance': initial = ATTENDANCE_CHART_DATA; break;
-  case 'performance': initial = ACADEMIC_CLASSES_DATA; break;
-  case 'student_attendance':  initial = INITIAL_STUDENT_ATTENDANCE;break;
-
-case 'staff_attendance':  initial = INITIAL_STAFF_ATTENDANCE;  break;
-  case 'schoolData': initial = schoolData; break; // This references your default export
-  default: initial = [];
-}
-
-      // Initialize the clean data
-      localStorage.setItem(`edusmart_${key}`, JSON.stringify(initial));
-      return initial;
+      return null;
     }
-
-    // If it reached here, it's valid data
     return JSON.parse(rawData);
   } catch (error) {
     console.error(`Error parsing data for ${key}:`, error);
-    return []; // Return empty array to prevent dashboard crash
+    return null;
+  }
+};
+
+export const setStorageData = (key, data) => {
+  try {
+    localStorage.setItem(`edusmart_${key}`, JSON.stringify(data));
+  } catch (error) {
+    console.error(`Error saving data for ${key}:`, error);
   }
 };
 
