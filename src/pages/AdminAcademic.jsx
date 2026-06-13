@@ -18,8 +18,46 @@ const AdminAcademic = () => {
   const [activeTab, setActiveTab] = useState("classes");
   const [selectedGradeFilter, setSelectedGradeFilter] = useState("All Grade");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  
   // --- STATE INITIALIZATION WITH LOCALSTORAGE CORES ---
+  const [searchTerm, setSearchTerm] = useState("");
+const [selectedGrade, setSelectedGrade] = useState("All");
+
+// Helper to filter data based on both Search and Grade
+
+const filterData = (data) => {
+  return data.filter((item) => {
+    // 1. Search Filter (Case insensitive)
+    const matchesSearch = Object.values(item).some(val => 
+      String(val).toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // 2. Grade Filter Logic
+    let matchesGrade = true; // Default to true if "All" is selected
+
+    if (selectedGrade !== "All") {
+      if (activeTab === "classes") {
+        matchesGrade = item.label === selectedGrade;
+      } 
+      else if (activeTab === "subjects") {
+        matchesGrade = item.grade === selectedGrade;
+      } 
+      else if (activeTab === "exams") {
+        // EXAM FIX: Extract the grade part from the "details" string 
+        // e.g., "Grade 6 . English" -> "Grade 6"
+        const extractedGrade = item.details.split(" . ")[0];
+        matchesGrade = extractedGrade === selectedGrade;
+      }
+      else if (activeTab === "timetable") {
+        // Timetable doesn't have a grade, so keep visible or filter as needed
+        matchesGrade = true; 
+      }
+    }
+
+    return matchesSearch && matchesGrade;
+  });
+};
+
 
   const [classesData, setClassesData] = useState(() => getStorageData("classes") || INITIAL_CLASSES);
   const [subjectsData, setSubjectsData] = useState(() => {  const data = getStorageData("subjects");
@@ -28,6 +66,7 @@ const AdminAcademic = () => {
 });
   const [examsData, setExamsData] = useState(() => getStorageData("exams") || ACADEMIC_EXAMS_DATA);
   const [timetableData, setTimetableData] = useState(() => getStorageData("timetable") || []);
+
 
   // --- PERSISTENCE WRAPPERS ---
   useEffect(() => { setStorageData("classes", classesData); }, [classesData]);
@@ -201,10 +240,34 @@ const AdminAcademic = () => {
         })}
       </div>
 
+     {/* SEARCH & FILTER BAR - Aligned Left and Right */}
+<div className="flex flex-col sm:flex-row justify-between items-center gap-3 mb-6">
+  
+  {/* Search Input - Left Aligned */}
+        <input
+          type="text"
+          placeholder={`Search ${activeTab}...`}
+          className="w-full sm:w-64 p-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-[#3B4FEB] shadow-sm transition-all"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
+        {/* Dropdown - Right Aligned */}
+        <select 
+          className="w-full sm:w-auto p-2.5 rounded-xl border border-gray-200 text-sm font-bold bg-white outline-none focus:border-[#3B4FEB] cursor-pointer"
+          value={selectedGrade}
+          onChange={(e) => setSelectedGrade(e.target.value)}
+        >
+          <option value="All">All Grades</option>
+          {uniqueGrades.map(g => <option key={g} value={g}>{g}</option>)}
+        </select>
+      </div>
+
+
       {/* VIEW 1: CLASSES SECTION GRID */}
       {activeTab === "classes" && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {classesData.map((item) => (
+          {filterData(classesData).map((item) => (
             <div key={item.id} className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 relative group">
               <div className="flex justify-between items-start">
                 <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center"><LayoutGrid size={20} /></div>
@@ -243,8 +306,8 @@ const AdminAcademic = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50 text-xs font-bold text-gray-700">
-              {subjectsData.map((sub, idx) => (
-                <tr key={sub.id || idx} className="hover:bg-gray-50/70 transition">
+              {filterData(subjectsData).map((sub, idx) => (
+                <tr key={sub.id || idx}> 
                   <td className="p-4 text-sm font-extrabold text-gray-900">{sub.name}</td>
 
                   {/* FIX: was bg-gray-100/80 — opacity making text invisible */}
@@ -317,7 +380,7 @@ const AdminAcademic = () => {
       {/* VIEW 4: EXAMS LIST TRACKS */}
       {activeTab === "exams" && (
         <div className="space-y-4">
-          {examsData.map((exam) => (
+          {filterData(examsData).map((exam) => (
             <div key={exam.id} className="bg-white rounded-3xl p-5 border border-gray-100 shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4 transition hover:shadow-md">
               <div className="flex items-center gap-4 w-full sm:w-auto">
                 <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0"><Award size={22} /></div>
@@ -337,6 +400,9 @@ const AdminAcademic = () => {
           ))}
         </div>
       )}
+
+
+
 
       {/* --- BACKDROP MODAL DISPATCH SYSTEM COMPONENT --- */}
       {isModalOpen && (
