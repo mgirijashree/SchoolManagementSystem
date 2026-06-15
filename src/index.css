@@ -8,3 +8,16 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+@layer utilities {
+  .hide-scrollbar {
+    /* IE, Edge, and Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    /* Chrome, Safari, and Opera */
+    display: none;
+  }
+}

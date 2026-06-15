@@ -21,7 +21,7 @@ const TeacherTopBar = ({ onSearch, notificationCount = 0 }) => {
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder="Search..."
-          className="w-full bg-[#F4F9F9] rounded-full py-2.5 pl-12 pr-4 outline-none text-sm border border-transparent focus:border-[#E59B33] transition-all"
+          className="w-full bg-[#F4F9F9] rounded-full py-2.5 pl-12 pr-4 outline-none text-sm border border-transparent focus:border-[#2E3DB7] transition-all"
         />
       </div>
 
@@ -29,7 +29,7 @@ const TeacherTopBar = ({ onSearch, notificationCount = 0 }) => {
       <div className="flex items-center gap-4 sm:gap-6 order-2">
         
         {/* Notification Icon */}
-        <button className="relative text-gray-600 hover:text-[#E59B33] transition-colors">
+        <button className="relative text-gray-600 hover:text-[#2E3DB7] transition-colors">
           <Bell size={22} />
           {notificationCount > 0 && (
             <span className="absolute -top-1 -right-1 w-4 h-4 bg-rose-500 text-white text-[10px] flex items-center justify-center rounded-full font-bold">

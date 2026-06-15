@@ -118,8 +118,8 @@ const Login = () => {
             onClick={() => setRole("admin")}
             className={`h-14 rounded-full font-semibold transition-all ${
               role === "admin"
-                ? "bg-[#E59B33] text-white"
-                : "border border-[#E59B33] text-gray-800"
+                ? "bg-[#2E3DB7] text-white"
+                : "border border-[#2E3DB7] text-gray-800"
             }`}
           >
             Admin
@@ -130,8 +130,8 @@ const Login = () => {
             onClick={() => setRole("teacher")}
             className={`h-14 rounded-full font-semibold transition-all ${
               role === "teacher"
-                ? "bg-[#E59B33] text-white"
-                : "border border-[#E59B33] text-gray-800"
+                ? "bg-[#2E3DB7] text-white"
+                : "border border-[#2E3DB7] text-gray-800"
             }`}
           >
             Teacher
@@ -161,7 +161,7 @@ const Login = () => {
                   ${
                     emailError
                       ? "border-red-500"
-                      : "border-[#7DC2B1] focus:border-[#E59B33]"
+                      : "border-[#7DC2B1] focus:border-[#2E3DB7]"
                   }`}
               />
             </div>
@@ -194,7 +194,7 @@ const Login = () => {
                   ${
                     passwordError
                       ? "border-red-500"
-                      : "border-[#7DC2B1] focus:border-[#E59B33]"
+                      : "border-[#7DC2B1] focus:border-[#2E3DB7]"
                   }`}
               />
 
@@ -230,7 +230,7 @@ const Login = () => {
           {/* Sign In */}
           <button
             type="submit"
-            className="w-full h-14 bg-[#E59B33] hover:bg-[#D48C2A] text-white font-bold rounded-full transition-all"
+            className="w-full h-14 bg-[#2E3DB7] hover:bg-[#D48C2A] text-white font-bold rounded-full transition-all"
           >
             Sign In
           </button>

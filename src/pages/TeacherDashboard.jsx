@@ -42,7 +42,7 @@ const TeacherDashboard = () => {
         {stats.map((stat, i) => (
           <div key={i} className="bg-white p-6 rounded-2xl border shadow-sm">
             <div className="flex justify-between items-start mb-4">
-              <div className="p-2 bg-[#E59B33]/10 text-[#E59B33] rounded-lg">{stat.icon}</div>
+              <div className="p-2 bg-[#2E3DB7]/10 text-[#2E3DB7] rounded-lg">{stat.icon}</div>
               <span className="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">{stat.trend}</span>
             </div>
             <h3 className="text-2xl font-bold text-gray-900">{stat.value}</h3>
@@ -60,7 +60,7 @@ const TeacherDashboard = () => {
               <XAxis dataKey="day" fontSize={12} />
               <YAxis fontSize={12} />
               <Tooltip />
-              <Area type="monotone" dataKey="attendance" stroke="#E59B33" fill="#E59B33" fillOpacity={0.2} />
+              <Area type="monotone" dataKey="attendance" stroke="#2E3DB7" fill="#2E3DB7" fillOpacity={0.2} />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -86,13 +86,13 @@ const TeacherDashboard = () => {
           <h2 className="text-xl font-bold mb-6">Today's Timetable</h2>
           <div className="space-y-4">
             {timetable.map((item, idx) => (
-              <div key={idx} className="flex gap-4 p-3 border-l-4 border-[#E59B33] bg-gray-50 rounded-r-lg">
+              <div key={idx} className="flex gap-4 p-3 border-l-4 border-[#2E3DB7] bg-gray-50 rounded-r-lg">
                 <div className="text-sm font-bold w-16 pt-1">{item.time}<div className="text-[10px] text-gray-400">{item.duration}</div></div>
                 <div className="flex-1">
                   <p className="font-semibold">{item.subject}</p>
                   {item.class && <p className="text-xs text-gray-500">{item.class} • {item.room}</p>}
                 </div>
-                {item.type !== "Break" && <span className="text-xs bg-[#E59B33]/10 text-[#E59B33] px-3 py-1 rounded-full self-center font-medium">{item.type}</span>}
+                {item.type !== "Break" && <span className="text-xs bg-[#2E3DB7]/10 text-[#2E3DB7] px-3 py-1 rounded-full self-center font-medium">{item.type}</span>}
               </div>
             ))}
           </div>

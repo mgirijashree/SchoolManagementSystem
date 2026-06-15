@@ -57,7 +57,7 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
         left-0
         h-screen
         w-72
-        bg-[#E59B33]
+        bg-[#2E3DB7]
         text-white
         flex
         flex-col
@@ -97,6 +97,7 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
             className="
             flex-1
             overflow-y-auto
+            hide-scrollbar
             px-4
             py-4
             space-y-2

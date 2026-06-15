@@ -101,7 +101,7 @@ const AdminDashboard = ({ onNavigate }) => {
       relationship: newStudent.relationship,
       status: newStudent.status,
       date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
-      avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(newStudent.name)}&background=E59B33&color=fff`
+      avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(newStudent.name)}&background=2E3DB7&color=fff`
     };
 
     const updatedStudentsList = [studentPayload, ...students];
@@ -135,13 +135,13 @@ const AdminDashboard = ({ onNavigate }) => {
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
           <div>
             <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Dashboard</h1>
-            <p className="text-gray-500 text-sm">Welcome back, <span className="text-[#E59B33] font-bold">Admin</span>. Here's What's happening today.</p>
+            <p className="text-gray-500 text-sm">Welcome back, <span className="text-[#2E3DB7] font-bold">Admin</span>. Here's What's happening today.</p>
           </div>
           <div className="flex flex-wrap gap-3 w-full sm:w-auto">
             <button onClick={() => setShowAddModal(true)} className="flex-1 sm:flex-initial bg-white border border-gray-200 text-gray-700 px-5 py-2.5 rounded-full shadow-sm hover:bg-gray-50 font-bold text-sm flex items-center justify-center gap-2 transition">
               <Plus size={16} /> Add Student
             </button>
-            <button onClick={() => setShowAnnounceBox(!showAnnounceBox)} className="flex-1 sm:flex-initial bg-[#E59B33] hover:bg-[#c98322] text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition">
+            <button onClick={() => setShowAnnounceBox(!showAnnounceBox)} className="flex-1 sm:flex-initial bg-[#2E3DB7] hover:bg-[#c98322] text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition">
               New Announcement
             </button>
           </div>
@@ -149,18 +149,18 @@ const AdminDashboard = ({ onNavigate }) => {
 
         {/* Announcement Dispatch Area */}
         {showAnnounceBox && (
-          <form onSubmit={submitAnnouncement} className="p-4 bg-white border border-[#E59B33]/20 rounded-2xl shadow-sm space-y-3">
+          <form onSubmit={submitAnnouncement} className="p-4 bg-white border border-[#2E3DB7]/20 rounded-2xl shadow-sm space-y-3">
             <label className="block text-sm font-bold text-gray-700">Broadcast Announcement to Notice Board Activity Feed</label>
             <input 
               type="text" 
               value={announcementText}
               onChange={(e) => setAnnouncementText(e.target.value)}
               placeholder="Type urgent notices here..." 
-              className="w-full bg-[#F4F9F9] border p-3 rounded-xl text-sm outline-none focus:ring-1 focus:ring-[#E59B33]"
+              className="w-full bg-[#F4F9F9] border p-3 rounded-xl text-sm outline-none focus:ring-1 focus:ring-[#2E3DB7]"
             />
             <div className="flex justify-end gap-2">
               <button type="button" onClick={() => setShowAnnounceBox(false)} className="px-4 py-1.5 text-xs font-bold text-gray-500">Cancel</button>
-              <button type="submit" className="px-4 py-1.5 bg-[#E59B33] text-white text-xs font-bold rounded-lg">Publish Notice</button>
+              <button type="submit" className="px-4 py-1.5 bg-[#2E3DB7] text-white text-xs font-bold rounded-lg">Publish Notice</button>
             </div>
           </form>
         )}
@@ -173,9 +173,9 @@ const AdminDashboard = ({ onNavigate }) => {
             { title: "Total Classes", value: classes.length, subtitle: "Across all grades", icon: <BookOpen />, growth: "+0.8%" },
             { title: "Total Revenue", value: "₹152K", subtitle: "Collected this month", icon: <IndianRupee />, growth: "+5.1%" },
           ].map((item, index) => (
-            <div key={index} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 border-l-4 border-l-[#E59B33]">
+            <div key={index} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 border-l-4 border-l-[#2E3DB7]">
               <div className="flex justify-between items-start">
-                <div className="bg-amber-50 p-2.5 rounded-xl text-[#E59B33]">{item.icon}</div>
+                <div className="bg-amber-50 p-2.5 rounded-xl text-[#2E3DB7]">{item.icon}</div>
                 <span className="bg-green-50 text-green-700 font-bold text-xs px-2 py-0.5 rounded-full flex items-center gap-0.5"><TrendingUp size={12} /> {item.growth}</span>
               </div>
               <h2 className="text-3xl font-black text-gray-900 mt-3 tracking-tight">{item.value}</h2>
@@ -219,10 +219,10 @@ const AdminDashboard = ({ onNavigate }) => {
             <Area 
               type="monotone" 
               dataKey="attendance" 
-              stroke="#E59B33" 
+              stroke="#2E3DB7" 
               strokeWidth={3} 
               fill="none" 
-              dot={{ fill: '#E59B33', r: 5, strokeWidth: 2, stroke: '#FFFFFF' }} 
+              dot={{ fill: '#2E3DB7', r: 5, strokeWidth: 2, stroke: '#FFFFFF' }} 
               activeDot={{ r: 7 }} 
             />
           </AreaChart>
@@ -369,24 +369,24 @@ const AdminDashboard = ({ onNavigate }) => {
             <form onSubmit={handleAddStudentSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-gray-700 tracking-wide uppercase mb-1.5">Student Full Name *</label>
-                <input type="text" required placeholder="e.g. Rahul Subramanian" value={newStudent.name} onChange={(e) => setNewStudent({...newStudent, name: e.target.value})} className="w-full bg-[#F4F9F9] border border-gray-200/60 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#E59B33]/20 focus:border-[#E59B33] transition-all" />
+                <input type="text" required placeholder="e.g. Rahul Subramanian" value={newStudent.name} onChange={(e) => setNewStudent({...newStudent, name: e.target.value})} className="w-full bg-[#F4F9F9] border border-gray-200/60 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#2E3DB7]/20 focus:border-[#2E3DB7] transition-all" />
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-gray-700 tracking-wide uppercase mb-1.5">Institutional Email Address *</label>
-                <input type="email" required placeholder="e.g. rahul.s@edusmart.in" value={newStudent.email} onChange={(e) => setNewStudent({...newStudent, email: e.target.value})} className="w-full bg-[#F4F9F9] border border-gray-200/60 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#E59B33]/20 focus:border-[#E59B33] transition-all" />
+                <input type="email" required placeholder="e.g. rahul.s@edusmart.in" value={newStudent.email} onChange={(e) => setNewStudent({...newStudent, email: e.target.value})} className="w-full bg-[#F4F9F9] border border-gray-200/60 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#2E3DB7]/20 focus:border-[#2E3DB7] transition-all" />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 tracking-wide uppercase mb-1.5">Grade Level</label>
-                  <select value={newStudent.grade} onChange={(e) => setNewStudent({...newStudent, grade: e.target.value})} className="w-full bg-[#F4F9F9] border border-gray-200/60 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#E59B33]/20 transition-all font-semibold text-gray-800">
+                  <select value={newStudent.grade} onChange={(e) => setNewStudent({...newStudent, grade: e.target.value})} className="w-full bg-[#F4F9F9] border border-gray-200/60 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#2E3DB7]/20 transition-all font-semibold text-gray-800">
                     {["Grade 4", "Grade 5", "Grade 6", "Grade 7", "Grade 8"].map(g => <option key={g} value={g}>{g}</option>)}
                   </select>
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-700 tracking-wide uppercase mb-1.5">Section Room</label>
-                  <select value={newStudent.section} onChange={(e) => setNewStudent({...newStudent, section: e.target.value})} className="w-full bg-[#F4F9F9] border border-gray-200/60 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#E59B33]/20 transition-all font-semibold text-gray-800">
+                  <select value={newStudent.section} onChange={(e) => setNewStudent({...newStudent, section: e.target.value})} className="w-full bg-[#F4F9F9] border border-gray-200/60 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#2E3DB7]/20 transition-all font-semibold text-gray-800">
                     {["A", "B", "C"].map(s => <option key={s} value={s}>Section {s}</option>)}
                   </select>
                 </div>
@@ -395,11 +395,11 @@ const AdminDashboard = ({ onNavigate }) => {
               <div className="grid grid-cols-3 gap-3 items-end">
                 <div className="col-span-2">
                   <label className="block text-xs font-bold text-gray-700 tracking-wide uppercase mb-1.5">Guardian Name *</label>
-                  <input type="text" required placeholder="e.g. Ramesh Subramanian" value={newStudent.guardian} onChange={(e) => setNewStudent({...newStudent, guardian: e.target.value})} className="w-full bg-[#F4F9F9] border border-gray-200/60 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#E59B33]/20 focus:border-[#E59B33] transition-all" />
+                  <input type="text" required placeholder="e.g. Ramesh Subramanian" value={newStudent.guardian} onChange={(e) => setNewStudent({...newStudent, guardian: e.target.value})} className="w-full bg-[#F4F9F9] border border-gray-200/60 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#2E3DB7]/20 focus:border-[#2E3DB7] transition-all" />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-700 tracking-wide uppercase mb-1.5">Relation</label>
-                  <select value={newStudent.relationship} onChange={(e) => setNewStudent({...newStudent, relationship: e.target.value})} className="w-full bg-[#F4F9F9] border border-gray-200/60 rounded-xl px-2 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#E59B33]/20 transition-all font-semibold text-gray-800">
+                  <select value={newStudent.relationship} onChange={(e) => setNewStudent({...newStudent, relationship: e.target.value})} className="w-full bg-[#F4F9F9] border border-gray-200/60 rounded-xl px-2 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#2E3DB7]/20 transition-all font-semibold text-gray-800">
                     {["Father", "Mother", "Guardian"].map(r => <option key={r} value={r}>{r}</option>)}
                   </select>
                 </div>
@@ -410,7 +410,7 @@ const AdminDashboard = ({ onNavigate }) => {
                 <div className="flex gap-4 bg-[#F4F9F9] p-2.5 rounded-xl border border-gray-200/40">
                   {["Active", "Inactive"].map(st => (
                     <label key={st} className="flex items-center gap-2 text-xs font-bold text-gray-700 cursor-pointer">
-                      <input type="radio" name="status" value={st} checked={newStudent.status === st} onChange={() => setNewStudent({...newStudent, status: st})} className="accent-[#E59B33] w-4 h-4" />
+                      <input type="radio" name="status" value={st} checked={newStudent.status === st} onChange={() => setNewStudent({...newStudent, status: st})} className="accent-[#2E3DB7] w-4 h-4" />
                       {st}
                     </label>
                   ))}
@@ -419,7 +419,7 @@ const AdminDashboard = ({ onNavigate }) => {
 
               <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 mt-6">
                 <button type="button" onClick={() => setShowAddModal(false)} className="px-5 py-2 rounded-full text-xs font-bold text-gray-500 hover:bg-gray-50 transition">Cancel</button>
-                <button type="submit" className="bg-[#E59B33] hover:bg-[#c98322] text-white px-6 py-2 rounded-full font-bold text-xs shadow-md transition-all flex items-center gap-1.5"><Plus size={14} strokeWidth={3} /> Save Student Record</button>
+                <button type="submit" className="bg-[#2E3DB7] hover:bg-[#c98322] text-white px-6 py-2 rounded-full font-bold text-xs shadow-md transition-all flex items-center gap-1.5"><Plus size={14} strokeWidth={3} /> Save Student Record</button>
               </div>
             </form>
           </div>
