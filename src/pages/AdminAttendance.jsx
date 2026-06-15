@@ -20,19 +20,21 @@ const AdminAttendance = () => {
   useEffect(() => {
     const students = getStorageData("student_attendance");
     const staff = getStorageData("staff_attendance");
-    setStudentRecords(students);
-    setStaffRecords(staff);
+    setStudentRecords(students || []);
+    setStaffRecords(staff || []);
   }, []);
 
   // --- CORE FILTER ENGINE ---
   const currentDataset = activeTab === "student" ? studentRecords : staffRecords;
 
   const filteredRecords = useMemo(() => {
+    if (!currentDataset) return [];
+    
     return currentDataset.filter((record) => {
       // 1. Key-stroke search check against Name or Roll Number index
       const matchesSearch = 
-        record.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        record.rollNo.toLowerCase().includes(searchQuery.toLowerCase());
+        record.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        record.rollNo?.toLowerCase().includes(searchQuery.toLowerCase());
 
       // 2. Exact match date check
       const matchesDate = record.date === selectedDate;
@@ -58,14 +60,7 @@ const AdminAttendance = () => {
     return counts;
   }, [filteredRecords]);
 
-
-  const exportToExcel = () => {
-  if (filteredRecords.length === 0) {
-    alert("No data available to export.");
-    return;
-  }
-
-  // --- INTERACTION HANDLERS (Placed at the top level of component) ---
+  // --- INTERACTION HANDLERS (Properly scoped!) ---
   const handleStatusChange = (id, newStatus) => {
     if (activeTab === "student") {
       setStudentRecords(prev => prev.map(item => item.id === id ? { ...item, status: newStatus } : item));
@@ -110,53 +105,6 @@ const AdminAttendance = () => {
     XLSX.writeFile(workbook, `Attendance_Report_${activeTab}_${selectedDate}.xlsx`);
   };
 
-  
-
-  // --- EXPORT: EXCEL DATA MATRIX PARSER GENERATOR ---
-  const exportToCSV = () => {
-    if (filteredRecords.length === 0) {
-      alert("Operational halt: No data available to export .");
-      return;
-    }
-
-    // Compose CSV Text Block Stream Header entries
-    const headers = ["Student/Staff Name", "Roll/ID No", "Assigned Class Group", "Current Status Flag", "Remarks Description", "Captured Log Date\n"];
-    const rows = filteredRecords.map(r => 
-      `"${r.name}","${r.rollNo}","${r.class}","${r.status}","${r.remarks || ''}","${r.date}"\n`
-    );
-
-    const blobStream = new Blob([headers.join(",") + rows.join("")], { type: "text/csv;charset=utf-8;" });
-    const dynamicURL = URL.createObjectURL(blobStream);
-    const linkElement = document.createElement("a");
-    
-    linkElement.setAttribute("href", dynamicURL);
-    linkElement.setAttribute("download", `Attendance_Report_${activeTab}_export_${selectedDate}.csv`);
-    document.body.appendChild(linkElement);
-    linkElement.click();
-    document.body.removeChild(linkElement);
-  };
-
-
-  // 1. Map your filtered records to a clean structure for Excel
-  const dataToExport = filteredRecords.map(r => ({
-    "Name": r.name,
-    "Roll/ID No": r.rollNo,
-    "Class Group": r.class,
-    "Status": r.status,
-    "Remarks": r.remarks || '',
-    "Date": r.date
-  }));
-
-  // 2. Create the worksheet and workbook
-  const worksheet = XLSX.utils.json_to_sheet(dataToExport);
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Attendance");
-
-  // 3. Generate and trigger download
-  XLSX.writeFile(workbook, `Attendance_Report_${activeTab}_${selectedDate}.xlsx`);
-};
-
-
   return (
     <div className="p-6 space-y-6 w-full max-w-[1400px] mx-auto text-gray-800">
       
@@ -167,11 +115,11 @@ const AdminAttendance = () => {
           <p className="text-gray-500 text-xs mt-0.5 font-medium">Track and manage student and staff attendance rosters seamlessly</p>
         </div>
         <button 
-  onClick={exportToExcel}
-  className="flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 px-4 rounded-xl border border-gray-200 shadow-sm transition-all"
->
-  <Download size={15} /> Export Excel
-</button>
+          onClick={exportToExcel}
+          className="flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 px-4 rounded-xl border border-gray-200 shadow-sm transition-all"
+        >
+          <Download size={15} /> Export Excel
+        </button>
       </div>
 
       {/* VIEW DIVISION TAB SELECTORS */}
